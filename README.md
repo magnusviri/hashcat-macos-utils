@@ -13,7 +13,7 @@ hashcat -m 7100 hash.txt -a 3 masks.hcmask
 
 ## dslocal-plist-ShadowHashData-2hashcat.sh
 
-Create a user named "crackme" with a stupid simple password, read it, crack it.
+Create a user named "crackme" with a stupid simple password, read it, crack it (ya know, make sure hashcat is working).
 
 ```
 sysadminctl -addUser crackme -password 1234
