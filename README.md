@@ -2,6 +2,12 @@
 
 Oh glorious day. Someone forgot their password and it was the only account with a SecureToken and it gave me the excuse to crack it and in the process come up with these scripts so I can do this so much easier in the future.
 
+References:
+- [1](https://apple.stackexchange.com/questions/220729/what-type-of-hash-are-a-macs-password-stored-in/220863)
+- [2](https://embracethered.com/blog/posts/2022/grabbing-and-cracking-macos-hashes/)
+
+And Claude made dslocal-plist-ShadowHashData-2hashcat.sh (after I gave it the commands). Oh, and ChatGPT refused to do it.
+
 ## mask-gen.py
 
 Creates a bruteforce mask.hcmask for a 8-9 length character password with 5-7 lowercase letters, 0-2 upper case letters, 0-2 digits, and 1-2 special characters.
