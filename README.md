@@ -10,7 +10,7 @@ And Claude made dslocal-plist-ShadowHashData-2hashcat.sh (after I gave it the co
 
 ## mask-gen.py
 
-Creates a bruteforce mask.hcmask for a 8-9 length character password with 5-7 lowercase letters, 0-2 upper case letters, 0-2 digits, and 1-2 special characters.
+Creates a bruteforce mask.hcmask. You must edit the script to change the number and types of masks. Right now it creates a 73 masks that include lowercase letters, 0-1 uppercase letters, and 0-1 digits.
 
 ```
 ./mask-gen.py
@@ -173,3 +173,42 @@ Stopped: Wed May 13 12:01:45 2026
 $ml$121951$7fdfc4246514edb7dd98114830ffa859150dc5bfd4acbd7360908969716e5147$8fc2bebe01af50124854c539589c9d9e402fe4e22f4b7cba21c150494838fa1f5ed449a8cc93919289a7b97c658af2d6b22f4618a5b90e2c926a3bfade9fe790e7eeb8fa28cd6b42c3e61892a7540ebf489261cf70220b82d9d5ef5d80f288cf971f9863b4a4f69bca7d9bf884ff525c4ead1adcb09636973e8d9aa81c9a730f:1234
 
 ```
+
+## Running hashcat
+
+I install hashcat with brew.
+
+```
+brew install hashcat
+```
+
+I use these arguments.
+
+```
+hashcat -m 7100 hash.txt -a 3 masks.hcmask -d 2 -w 3 --restore-timer 360
+```
+
+When you run it, it will print some startup info then show this.
+
+```
+[s]tatus [p]ause [b]ypass [c]heckpoint [f]inish [q]uit =>
+```
+
+"s" prints a status. Important things are:
+
+- "Time Estimated" shows how lonng it thinks it will take.
+- "Progress" shows how far along it is.
+- "Candidates" shows what it is currently trying.
+
+"p" briefly pauses, freeing the cpu/gpu, but keeps everything in RAM.
+
+"b" skips the current wordlist/rule/mask and moves to the next one.
+
+"c" creates a checkpoint file so you can quit hashcat and start where you left off.
+
+If installed with Homebrew, the checkpoint is saved in /opt/homebrew/Cellar/hashcat/7.1.2/share/hashcat/sessions/.
+
+To restart from a checkpoint use `hashcat --restore`.
+
+"f" lets the current wordlist/mask/attack mode run to completion, then stops.
+
